@@ -2,10 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>me.kipchakbaev.liferay</groupId>
-  <artifactId>liferay-parent</artifactId>
+  <artifactId>spittr-parent</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>Sample Liferay Parent project</name>
+  <name>Spittr - Spring In Action. Remake to PortletMVC</name>
 	<properties>
         <liferay.version>6.2.5</liferay.version>
         <java.source.version>1.7</java.source.version>
@@ -76,6 +76,14 @@
                 <scope>provided</scope>
             </dependency>
             
+        <!-- Apache Commons -->    
+            <dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>3.4</version>
+			</dependency>
+            
+            
 		<!-- Spring Framework Dependencies -->
 			<dependency>
 	            <groupId>org.springframework</groupId>
@@ -137,8 +145,6 @@
         </plugins>
     </build>  
   <modules>
-    <module>sample-springmvc-portlet</module>
-    <module>sample-portlet1</module>
-    <!-- <module>pure-spring-mvc-portlet</module> -->
+    <module>spittr</module>
   </modules>
 </project>
