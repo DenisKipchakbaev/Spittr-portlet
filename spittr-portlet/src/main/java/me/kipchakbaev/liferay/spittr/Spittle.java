@@ -1,19 +1,22 @@
 package me.kipchakbaev.liferay.spittr;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class Spittle {
-	private final Long id;
-	private final String message;
-	private final Date time;
+public class Spittle implements Serializable{
+	
+	private static final long serialVersionUID = 705759605797889356L;
+	private Long id;
+	private String message;
+	private Date time;
 	private Double latitude;
 	private Double longitude;
 
 	public Spittle() {
-		this(null, null, null, null, null);
+		
 	}
 	public Spittle(String message, Date time) {
 		this(null, message, time, null, null);
@@ -47,6 +50,36 @@ public class Spittle {
 		return latitude;
 	}
 
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+	/**
+	 * @param message the message to set
+	 */
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	/**
+	 * @param time the time to set
+	 */
+	public void setTime(Date time) {
+		this.time = time;
+	}
+	/**
+	 * @param latitude the latitude to set
+	 */
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+	/**
+	 * @param longitude the longitude to set
+	 */
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
 	@Override
 	public boolean equals(Object that) {
 		return EqualsBuilder.reflectionEquals(this, that, "id", "time");

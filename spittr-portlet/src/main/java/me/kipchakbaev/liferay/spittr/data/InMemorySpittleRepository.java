@@ -13,10 +13,14 @@ public class InMemorySpittleRepository implements SpittleRepository {
 
 	List<Spittle> spittleList = new ArrayList<>();
 	
+	public InMemorySpittleRepository() {
+		generateSpittleList();
+	}
+	
 	@Override
 	public List<Spittle> findSpittles(long max, int count) {
 		
-		return generateSpittleList();
+		return spittleList;
 	}
 
 	@Override

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.portlet.bind.annotation.ActionMapping;
 import org.springframework.web.portlet.bind.annotation.RenderMapping;
 
@@ -23,10 +24,10 @@ import me.kipchakbaev.liferay.spittr.data.SpittleRepository;
 
 @Controller
 @RequestMapping("VIEW")
-@SessionAttributes(value="book")
+@SessionAttributes(value="spittle")
 public class SpittleController {
 	
-	private static final Log LOGGER = LogFactoryUtil.getLog(HomeController.class);
+	private static final Log LOGGER = LogFactoryUtil.getLog(SpittleController.class);
 	
 	private SpittleRepository spittleRepository;
 	
@@ -42,32 +43,33 @@ public class SpittleController {
             LOGGER.trace("Spittles view");
         }
 		model.addAttribute("spittleList", spittleRepository.findSpittles(Long.MAX_VALUE, 20));
+		model.addAttribute("spittle", new Spittle());
 		return Views.SPITTLES_VIEW;
 	}
 	
-	@ModelAttribute("spittle")
+	/*@ModelAttribute("spittle")
 	public Spittle getCommandObject() {
+		LOGGER.info("modelattribute");
 		return new Spittle();
-	}
+	}*/
 	
-	@InitBinder("spittle")
+	/*@InitBinder("spittle")
 	public void initBinder(WebDataBinder binder) {
+		LOGGER.info("init binder");
 		//binder.registerCustomEditor(Long.class, new LongNumberPropertyEditor());
-	}
-	
-	/*@RequestMapping(method=RequestMethod.POST)
-	public String saveSpittle(SpittleForm form, Model model) throws Exception {
-		spittleRepository.save(new Spittle(null, form.getMessage(), new Date(), 
-				form.getLongitude(), form.getLatitude()));
-		return "redirect:/spittles";
 	}*/
 	
 	@ActionMapping(params = "action=submit-spittle")
-	public void saveSpittle(@ModelAttribute(value="spittle") Spittle spittle, BindingResult bindingResult, ActionResponse response) {
+	public void saveSpittle(@ModelAttribute("spittle") Spittle spittle, 
+			ActionResponse response, Model model, SessionStatus sessionStatus) {
+		
 		LOGGER.info("action save spittle");
-		LOGGER.info(spittle);
+		LOGGER.info(spittle.getMessage());
+		
 		spittleRepository.save(spittle);
+		sessionStatus.setComplete();
 		response.setRenderParameter("render", "spittles-view");
+		
 		if (LOGGER.isTraceEnabled()) {
 			LOGGER.trace("Action one");
 		}

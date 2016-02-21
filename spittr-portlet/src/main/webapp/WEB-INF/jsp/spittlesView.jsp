@@ -6,10 +6,10 @@
 </portlet:actionURL>
 <div class="spittleForm">
 	<h1>Spit it out...</h1>
-	<sform:form action="${saveSpittleUrl}" method="POST" commandName="spittle" name="saveSpittleForm">
-		<sform:input type="hidden" path="latitude" /> 
-		<sform:input type="hidden" path="longitude" />
-		<sform:textarea path="message" cols="80" rows="5"></sform:textarea>
+	<sform:form action="${saveSpittleUrl}" method="POST" modelAttribute="spittle">
+		<%-- <sform:input type="hidden" path="latitude" /> 
+		<sform:input type="hidden" path="longitude" /> --%>
+		<sform:input path="message" cols="80" rows="5"></sform:input>
 		<br /> 
 		<input type="submit" value="Add Spittle" />
 	</sform:form>
